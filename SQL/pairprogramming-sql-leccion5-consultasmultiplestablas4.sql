@@ -56,17 +56,13 @@ LIMIT 10;
 # 5 - Bonus
 # Extraed cuál es el producto que más ha sido comprado y en qué cantidad se compró.
 
-
 SELECT product_name AS ProductName, SUM(order_details.quantity)
 FROM products
 INNER JOIN order_details
 ON products.product_id = order_details.product_id
 GROUP BY order_details.product_id
-HAVING COUNT(order_details.quantity) >= ALL (
-                           SELECT SUM(quantity)
-                           FROM order_details
-                           GROUP BY product_id);
-
-
-
-
+HAVING SUM(order_details.quantity) >= ALL(
+SELECT SUM(quantity)
+FROM order_details
+GROUP BY product_id
+ORDER BY SUM(quantity) DESC);
