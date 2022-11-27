@@ -19,7 +19,7 @@ GROUP BY order_date;
 /* 4. Modificar la consulta anterior para que los agrupe por meses */
 SELECT COUNT(order_id) AS NumPedidos, MONTH(order_date) AS Mes, YEAR(order_date) AS Año
 FROM orders
-GROUP BY order_date;
+GROUP BY MONTH(order_date);
 
  /* 5. Seleccionad las ciudades con 4 o más empleadas */
  SELECT COUNT(DISTINCT employee_id) AS NoEmpleadas, city
